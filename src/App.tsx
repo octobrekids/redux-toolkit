@@ -11,7 +11,7 @@ function App() {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const editInput = useRef<HTMLInputElement>(null);
 
-
+  const selectedTodo = (selectedTodoId && todos.find(todo => todo.id === selectedTodoId)) || null;
   
   
   return (
