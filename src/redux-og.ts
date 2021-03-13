@@ -1,9 +1,10 @@
 import { Todo } from "./model/Todos";
 import { v1 as uuid } from "uuid";
 import todos from "./constants/Todos";
-import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
+import { composeWithDevTools} from 'redux-devtools-extension'
 
 // constants
 const CREATE_TODO = "CREATE_TODO";
@@ -183,5 +184,5 @@ const reducers = combineReducers({
 // Store
 export default createStore(
   reducers,
-  compose(applyMiddleware(thunk), applyMiddleware(logger))
+  composeWithDevTools(applyMiddleware(thunk,logger))
 );
