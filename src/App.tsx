@@ -1,11 +1,16 @@
 import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import './App.css';
 import todos from './constants/Todos';
-
-const selectedTodoId = todos[1].id;
-const editedCount = 0;
+import { useSelector, useDispatch } from 'react-redux';
+import { State } from './model/Todos';
 
 const App = function () {
+  const dispatch = useDispatch();
+  const todos = useSelector((state: State) => state.todos) 
+  const selectedTodoId = useSelector((state: State) => state.selectedTodo) 
+  const editedCount = useSelector((state: State) => state.counter) 
+
+
   const [newTodoInput, setNewTodoInput] = useState<string>("");
   const [editTodoInput, setEditTodoInput] = useState<string>("");
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
