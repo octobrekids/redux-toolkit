@@ -136,3 +136,21 @@ const todosReducer = (
   }
 };
 
+type SelectedTodoActionTypes = SelectTodoActionType;
+const selectedTodoReducer = (
+    state: string | null = null,
+    action: SelectedTodoActionTypes
+) => {
+    switch(action.type) {
+        case SELECT_TODO: {
+            return action.payload.id
+        }
+        default: {
+            return state;
+        }
+    }
+
+}
+
+
+
