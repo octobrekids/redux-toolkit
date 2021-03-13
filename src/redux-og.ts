@@ -1,6 +1,7 @@
 import { Todo } from "./model/Todos";
 import { v1 as uuid } from "uuid";
 import todos from "./constants/Todos";
+import { combineReducers } from "redux";
 
 // constants
 const CREATE_TODO = "CREATE_TODO";
@@ -128,46 +129,51 @@ const todosReducer = (
       );
     }
     case DELETE_TODO: {
-        return state.filter((todo) => todo.id !== action.payload.id)
+      return state.filter((todo) => todo.id !== action.payload.id);
     }
     default: {
-        return state
+      return state;
     }
   }
 };
 
 type SelectedTodoActionTypes = SelectTodoActionType;
 const selectedTodoReducer = (
-    state: string | null = null,
-    action: SelectedTodoActionTypes
+  state: string | null = null,
+  action: SelectedTodoActionTypes
 ) => {
-    switch(action.type) {
-        case SELECT_TODO: {
-            return action.payload.id
-        }
-        default: {
-            return state;
-        }
+  switch (action.type) {
+    case SELECT_TODO: {
+      return action.payload.id;
     }
-
-}
+    default: {
+      return state;
+    }
+  }
+};
 
 const counterReducer = (state: number = 0, action: TodoActionTypes) => {
-    switch(action.type) {
-        case CREATE_TODO: {
-            return state + 1;
-        }
-        case EDIT_TODO: {
-            return state + 1;
-        }
-        case DELETE_TODO: {
-            return state + 1;
-        }
-        case TOGGLE_TODO: {
-            return state + 1;
-        }
-        default: {
-            return state
-        }
+  switch (action.type) {
+    case CREATE_TODO: {
+      return state + 1;
     }
-}
+    case EDIT_TODO: {
+      return state + 1;
+    }
+    case DELETE_TODO: {
+      return state + 1;
+    }
+    case TOGGLE_TODO: {
+      return state + 1;
+    }
+    default: {
+      return state;
+    }
+  }
+};
+
+const reducers = combineReducers({
+  todos: todosReducer,
+  selectedTodo: selectedTodoReducer,
+  counter: counterReducer,
+});
