@@ -14,10 +14,7 @@ interface CreateTodoActionType {
   payload: Todo;
 }
 
-export const createTodoActionCreator = (data: {
-  desc: string;
-}): CreateTodoActionType => {
-  const { desc } = data;
+export const createTodoActionCreator = (desc: string): CreateTodoActionType => {
   return {
     type: CREATE_TODO,
     payload: {
@@ -33,11 +30,13 @@ interface EditTodoActionType {
   payload: { id: string; desc: string };
 }
 
-export const editTodoActionCreator = (data: {
+export const editTodoActionCreator = ({
+  id,
+  desc,
+}: {
   id: string;
   desc: string;
 }): EditTodoActionType => {
-  const { id, desc } = data;
   return {
     type: EDIT_TODO,
     payload: {
