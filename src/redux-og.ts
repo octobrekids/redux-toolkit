@@ -1,7 +1,7 @@
 import { Todo } from "./model/Todos";
 import { v1 as uuid } from "uuid";
 import todos from "./constants/Todos";
-import { combineReducers } from "redux";
+import { combineReducers, createStore } from "redux";
 
 // constants
 const CREATE_TODO = "CREATE_TODO";
@@ -177,3 +177,6 @@ const reducers = combineReducers({
   selectedTodo: selectedTodoReducer,
   counter: counterReducer,
 });
+
+// Store
+export default createStore(reducers)
