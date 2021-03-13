@@ -1,5 +1,6 @@
 import { Todo } from "./model/Todos";
 import { v1 as uuid } from "uuid";
+import todos from "./constants/Todos";
 
 // constants
 const CREATE_TODO = "CREATE_TODO";
@@ -96,3 +97,42 @@ export const SelectTodoActionCreator = (id: string): SelectTodoActionType => {
     },
   };
 };
+
+// Reducers
+const todoInitialState: Todo[] = todos;
+type TodoActionTypes =
+  | CreateTodoActionType
+  | EditTodoActionType
+  | ToggleActionType
+  | DeleteTodoActionType;
+const todosReducer = (
+  state: Todo[] = todoInitialState,
+  action: TodoActionTypes
+) => {
+  switch (action.type) {
+    case CREATE_TODO: {
+      return [...state, action.payload];
+    }
+    case EDIT_TODO: {
+      return state.map((todo) =>
+        todo.id === action.payload.id
+          ? { ...todo, desc: action.payload.desc }
+          : todo
+      );
+    }
+    case TOGGLE_TODO: {
+      return state.map((todo) =>
+        todo.id === action.payload.id
+          ? { ...todo, isComplete: action.payload.isComplete }
+          : todo
+      );
+    }
+    case DELETE_TODO: {
+        return state.filter((todo) => todo.id !== action.payload.id)
+    }
+    default: {
+        return state
+    }
+  }
+};
+
