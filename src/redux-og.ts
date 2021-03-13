@@ -80,3 +80,19 @@ export const deleteTodoActionCreator = (id: string): DeleteTodoActionType => {
     },
   };
 };
+
+interface SelectTodoActionType {
+  type: typeof SELECT_TODO;
+  payload: {
+    id: string;
+  };
+}
+
+export const SelectTodoActionCreator = (id: string): SelectTodoActionType => {
+  return {
+    type: SELECT_TODO,
+    payload: {
+      id,
+    },
+  };
+};
