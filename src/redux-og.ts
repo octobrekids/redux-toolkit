@@ -13,7 +13,8 @@ interface CreateTodoActionType {
   type: typeof CREATE_TODO;
   payload: Todo;
 }
-export const CreateTodoActionCreator = (data: {
+
+export const createTodoActionCreator = (data: {
   desc: string;
 }): CreateTodoActionType => {
   const { desc } = data;
@@ -23,6 +24,25 @@ export const CreateTodoActionCreator = (data: {
       id: uuid(),
       desc,
       isComplete: false,
+    },
+  };
+};
+
+interface EditTodoActionType {
+  type: typeof EDIT_TODO;
+  payload: { id: string; desc: string };
+}
+
+export const editTodoActionCreator = (data: {
+  id: string;
+  desc: string;
+}): EditTodoActionType => {
+  const { id, desc } = data;
+  return {
+    type: EDIT_TODO,
+    payload: {
+      id,
+      desc,
     },
   };
 };
