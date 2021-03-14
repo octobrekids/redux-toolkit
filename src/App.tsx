@@ -1,6 +1,5 @@
 import React, { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 import './App.css';
-import todos from './constants/Todos';
 import { useSelector, useDispatch } from 'react-redux';
 import { State } from './model/Todos';
 import { createTodoActionCreator, deleteTodoActionCreator, selectTodoActionCreator, toggleTodoActionCreator, editTodoActionCreator } from './redux-og'
@@ -80,6 +79,7 @@ const App = function () {
 
   const handleDelete = (): void => {
     if (!selectedTodoId) return;
+    dispatch(deleteTodoActionCreator(selectedTodoId))
   };
 
   return (
