@@ -93,7 +93,7 @@ interface SelectTodoActionType {
   };
 }
 
-export const SelectTodoActionCreator = (id: string): SelectTodoActionType => {
+export const selectTodoActionCreator = (id: string): SelectTodoActionType => {
   return {
     type: SELECT_TODO,
     payload: {
