@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stringify, v1 as uuid } from "uuid";
+import { v1 as uuid } from "uuid";
 import todos from "./constants/Todos";
 import { Todo } from "./model/Todos";
 
@@ -52,3 +52,23 @@ const todosSlice = createSlice({
     },
   },
 });
+
+const selectedTodoSlice = createSlice({
+    name: 'selectedTodo',
+    initialState: null as string | null,
+    reducers: {
+        select: (state,action: PayloadAction<{id: string}> ) => action.payload.id,
+    }
+})
+
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState: 0,
+    reducers: {},
+    extraReducers: {
+        [todosSlice.actions.create.type]: state => state + 1,
+        [todosSlice.actions.edit.type]: state => state + 1,
+        [todosSlice.actions.toggle.type]: state => state + 1,
+        [todosSlice.actions.remove.type]: state => state + 1,
+    }
+})
