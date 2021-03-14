@@ -53,13 +53,10 @@ interface ToggleActionType {
   payload: { id: string; isComplete: boolean };
 }
 
-export const toggleTodoActionCreator = ({
-  id,
-  isComplete,
-}: {
-  id: string;
-  isComplete: boolean;
-}): ToggleActionType => {
+export const toggleTodoActionCreator = (
+  id: string,
+  isComplete: boolean
+): ToggleActionType => {
   return {
     type: TOGGLE_TODO,
     payload: {

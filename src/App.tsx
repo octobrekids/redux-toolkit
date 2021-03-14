@@ -30,14 +30,14 @@ const App = function () {
 
   const handleCreateNewTodo = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if(!newTodoInput.length) return;
+    if (!newTodoInput.length) return;
     dispatch(createTodoActionCreator(newTodoInput));
     setNewTodoInput("");
   };
 
   const handleSelectTodo = (todoId: string) => (): void => {
     dispatch(selectTodoActionCreator(todoId));
-   };
+  };
 
   const handleEdit = (): void => {
     if (!selectedTodo) return;
@@ -54,11 +54,11 @@ const App = function () {
 
   const handleUpdate = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if(!editTodoInput.length) {
+    if (!editTodoInput.length) {
       handleCancelUpdate();
       return;
     }
-    if(selectedTodoId) {
+    if (selectedTodoId) {
       dispatch(editTodoActionCreator(selectedTodoId, editTodoInput))
       setIsEditMode(false);
       setEditTodoInput("");
@@ -75,6 +75,7 @@ const App = function () {
 
   const handleToggle = (): void => {
     if (!selectedTodoId || !selectedTodo) return;
+    dispatch(toggleTodoActionCreator(selectedTodoId, !selectedTodo.isComplete))
   };
 
   const handleDelete = (): void => {
