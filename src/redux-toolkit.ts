@@ -1,6 +1,7 @@
 import {
   configureStore,
   createSlice,
+  getDefaultMiddleware,
   PayloadAction,
 } from "@reduxjs/toolkit";
 import logger from "redux-logger";
@@ -96,7 +97,7 @@ const reducer = {
   counter: counterSlice.reducer,
 };
 
-const middleware = [logger];
+const middleware = [...getDefaultMiddleware(), logger];
 
 export default configureStore({
   reducer,
