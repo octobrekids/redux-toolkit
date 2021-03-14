@@ -9,12 +9,28 @@ const todosSlice = createSlice({
   name: "todos",
   initialState: todosInitialState,
   reducers: {
+    create: {
+      reducer: (
+        state,
+        action: PayloadAction<{ id: string; desc: string; isComplete: boolean }>
+      ) => {
+        const { payload } = action;
+        state.push(payload);
+      },
+      prepare: (desc: string) => ({
+        payload: {
+          id: uuid(),
+          desc,
+          isComplete: false,
+        },
+      }),
+    },
     edit: (state, action: PayloadAction<{ id: string; desc: string }>) => {
       // mutate directly - redux toolkit will handle it with magic! immer will magicly convert it to immuatable data
       const { payload } = action;
-      const index = state.findIndex((todo) => todo.id === payload.id);
-      if (index !== -1) {
-        state[index].desc = payload.desc;
+      const todoToEdit = state.find((todo) => todo.id === payload.id);
+      if (todoToEdit) {
+        todoToEdit.desc = payload.desc;
       }
     },
     toggle: (
@@ -22,15 +38,15 @@ const todosSlice = createSlice({
       action: PayloadAction<{ id: string; isComplete: boolean }>
     ) => {
       const { payload } = action;
-      const index = state.findIndex((todo) => todo.id === payload.id);
-      if (index !== -1) {
-        state[index].isComplete = payload.isComplete;
+      const todoToEdit = state.find((todo) => todo.id === payload.id);
+      if (todoToEdit) {
+        todoToEdit.isComplete = payload.isComplete;
       }
     },
     remove: (state, action: PayloadAction<{ id: string }>) => {
       const { payload } = action;
       const index = state.findIndex((todo) => todo.id === payload.id);
-      if (index !== -1) {
+      if (index) {
         state.splice(index, 1);
       }
     },
