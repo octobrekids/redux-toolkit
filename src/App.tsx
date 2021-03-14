@@ -35,7 +35,9 @@ const App = function () {
     setNewTodoInput("");
   };
 
-  const handleSelectTodo = (todoId: string) => (): void => { };
+  const handleSelectTodo = (todoId: string) => (): void => {
+    dispatch(selectTodoActionCreator(todoId));
+   };
 
   const handleEdit = (): void => {
     if (!selectedTodo) return;
@@ -52,12 +54,21 @@ const App = function () {
 
   const handleUpdate = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    if(!editTodoInput.length) {
+      handleCancelUpdate();
+      return;
+    }
+    if(selectedTodoId) {
+      dispatch(editTodoActionCreator(selectedTodoId, editTodoInput))
+      setIsEditMode(false);
+      setEditTodoInput("");
+    }
   };
 
   const handleCancelUpdate = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    e?: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
-    e.preventDefault();
+    e?.preventDefault();
     setIsEditMode(false);
     setEditTodoInput("");
   };

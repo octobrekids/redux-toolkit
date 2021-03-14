@@ -4,7 +4,7 @@ import todos from "./constants/Todos";
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
-import { composeWithDevTools} from 'redux-devtools-extension'
+import { composeWithDevTools } from "redux-devtools-extension";
 
 // constants
 const CREATE_TODO = "CREATE_TODO";
@@ -35,13 +35,10 @@ interface EditTodoActionType {
   payload: { id: string; desc: string };
 }
 
-export const editTodoActionCreator = ({
-  id,
-  desc,
-}: {
-  id: string;
-  desc: string;
-}): EditTodoActionType => {
+export const editTodoActionCreator = (
+  id: string,
+  desc: string
+): EditTodoActionType => {
   return {
     type: EDIT_TODO,
     payload: {
@@ -184,5 +181,5 @@ const reducers = combineReducers({
 // Store
 export default createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(thunk,logger))
+  composeWithDevTools(applyMiddleware(thunk, logger))
 );
