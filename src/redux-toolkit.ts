@@ -78,6 +78,17 @@ const counterSlice = createSlice({
   },
 });
 
+export const { 
+    create: createTodoActionCreator,
+    edit: editTodoActionCreator,
+    toggle: toggleTodoActionCreator,
+    remove: deleteTodoActionCreator
+} = todosSlice.actions;
+
+export const {
+    select: selectTodoActionCreator
+} = selectedTodoSlice.actions;
+
 // redux toolkit will prepare combineReducer no need to call it
 const reducer = {
   todos: todosSlice.reducer,
